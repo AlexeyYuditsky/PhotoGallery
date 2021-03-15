@@ -1,6 +1,5 @@
 <component name="ProjectCodeStyleConfiguration">
   <code_scheme name="Project" version="173">
-    <option name="RIGHT_MARGIN" value="999" />
     <JetCodeStyleSettings>
       <option name="PACKAGES_TO_USE_STAR_IMPORTS">
         <value>
@@ -18,6 +17,7 @@
           <package name="" alias="true" withSubpackages="true" />
         </value>
       </option>
+      <option name="CODE_STYLE_DEFAULTS" value="KOTLIN_OFFICIAL" />
     </JetCodeStyleSettings>
     <codeStyleSettings language="XML">
       <option name="FORCE_REARRANGE_MODE" value="1" />
@@ -133,7 +133,7 @@
       </arrangement>
     </codeStyleSettings>
     <codeStyleSettings language="kotlin">
-      <option name="RIGHT_MARGIN" value="999" />
+      <option name="CODE_STYLE_DEFAULTS" value="KOTLIN_OFFICIAL" />
     </codeStyleSettings>
   </code_scheme>
 </component>
