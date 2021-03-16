@@ -5,8 +5,14 @@ import retrofit2.http.GET
 
 interface FlickrApi {
 
-    // Аннотация настраивает Call, возвращаемый функцией fetchContents(), на выполнение GET-запроса. Относительный путь «/» означает, что запрос будет отправлен на базовый URL-адрес
-    @GET("/")
+    // Аннотация определяет запрос "получить недавние интересные фотографии". Аннотация настраивает Call<String>, возвращаемый функцией fetchContents(), на выполнение GET-запроса.
+    @GET(
+        "services/rest/?method=flickr.interestingness.getList" +
+                "&api_key=fbc38de5cae80aed3c212de680b96594" +
+                "&format=json" +
+                "&nojsoncallback=1" +
+                "&extras=url_s"
+    )
     fun fetchContents(): Call<String>
 
 }
