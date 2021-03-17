@@ -21,13 +21,13 @@ class PhotoGalleryFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         // Возвращаем результат веб-запроса
-        val flickrLiveData: LiveData<String> = FlickrFetchr().fetchContents()
+        val flickrLiveData: LiveData<List<GalleryItem>> = FlickrFetchr().fetchPhotos()
 
         // Наблюдаем за полученными данными веб-запроса
         flickrLiveData.observe(
             this,
-            Observer { responseString -> // Observer - простой обратный вызов который можно получить от LiveData
-                Log.d(TAG, "Ответ получен: $responseString")
+            Observer { galleryItems -> // Observer - простой обратный вызов который можно получить от LiveData
+                Log.d(TAG, "Ответ получен: $galleryItems")
             }
         )
     }
