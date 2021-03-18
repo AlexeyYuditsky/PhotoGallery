@@ -20,6 +20,8 @@ class FlickrFetchr {
     private val flickrApi: FlickrApi
 
     init {
+        Log.d("TAG", "FlickrFetchr блок init в начале, создание экземпляра Retrofit")
+
         // Создаём экземпляр Retrofit
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl("https://www.flickr.com/") // Устанавливаем основной URL-адрес
@@ -28,11 +30,14 @@ class FlickrFetchr {
 
         // Retrofit создаёт экземпляр нашего интерфейса API (FlickrApi)
         flickrApi = retrofit.create(FlickrApi::class.java)
+
+        Log.d("TAG", "FlickrFetchr блок init в конце, создание экземпляра Retrofit")
     }
 
 
-    // Функция возвращает веб-запрос
+    // Функция возвращает результат веб-запроса
     fun fetchPhotos(): LiveData<List<GalleryItem>> {
+        Log.d("TAG", "FlickrFetchr.fetchPhotos() в начале метода выполняющий веб запрос")
 
         // Здесь храниться результат веб-запроса
         val responseLiveData: MutableLiveData<List<GalleryItem>> = MutableLiveData()
@@ -69,6 +74,7 @@ class FlickrFetchr {
                 Log.d(TAG, "Не удалось получить фотографии", t)
             }
         })
+        Log.d("TAG", "FlickrFetchr.fetchPhotos() в конце метода выполняющий веб запрос")
 
         return responseLiveData
     }

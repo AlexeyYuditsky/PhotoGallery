@@ -14,5 +14,4 @@ interface FlickrApi {
                 "&extras=url_s"
     )
     fun fetchPhotos(): Call<FlickrResponse>
-
 }
