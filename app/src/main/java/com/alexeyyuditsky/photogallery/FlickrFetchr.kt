@@ -12,13 +12,17 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-private const val TAG = "FlickrFetchr"
-
 // Класс "репозиторий", который хранит всю логику доступа на удаленный сервер
 class FlickrFetchr {
 
+    // Свойство для API Retrofit
     private val flickrApi: FlickrApi
 
+    // Свойство для веб-запроса
+    lateinit var flickrRequest: Call<FlickrResponse>
+
+
+    // Создание экземпляра Retrofit и API для работы с ним
     init {
         Log.d("TAG", "FlickrFetchr блок init в начале, создание экземпляра Retrofit")
 
@@ -35,6 +39,16 @@ class FlickrFetchr {
     }
 
 
+    // Функция отменяет веб-запрос, если запрос был инициализирован
+    fun cancelRequestInFlight() {
+        if (::flickrRequest.isInitialized) {
+
+            // Отменяем запрос
+            flickrRequest.cancel()
+        }
+    }
+
+
     // Функция возвращает результат веб-запроса
     fun fetchPhotos(): LiveData<List<GalleryItem>> {
         Log.d("TAG", "FlickrFetchr.fetchPhotos() в начале метода выполняющий веб запрос")
@@ -43,7 +57,7 @@ class FlickrFetchr {
         val responseLiveData: MutableLiveData<List<GalleryItem>> = MutableLiveData()
 
         // Получаем объект Call<FlickrResponse> выполняющий веб-запрос
-        val flickrRequest: Call<FlickrResponse> = flickrApi.fetchPhotos()
+        flickrRequest = flickrApi.fetchPhotos()
 
         // Выполнение (в фоновом потоке) веб-запроса находящегося в объекте Call<FlickrResponse>
         flickrRequest.enqueue(object : Callback<FlickrResponse> {
@@ -71,7 +85,7 @@ class FlickrFetchr {
 
             // Функция вызывается, если ответ от сервера НЕ ПОЛУЧЕН
             override fun onFailure(call: Call<FlickrResponse>, t: Throwable) {
-                Log.d(TAG, "Не удалось получить фотографии", t)
+                Log.d("TAG", "Не удалось получить фотографии", t)
             }
         })
         Log.d("TAG", "FlickrFetchr.fetchPhotos() в конце метода выполняющий веб запрос")

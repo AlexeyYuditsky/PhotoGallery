@@ -5,7 +5,7 @@ import retrofit2.http.GET
 
 interface FlickrApi {
 
-    // Аннотация определяет запрос "получить недавние интересные фотографии". Аннотация настраивает Call<String>, возвращаемый функцией fetchContents(), на выполнение GET-запроса.
+    // Аннотация определяет запрос "получить недавние интересные фотографии". Аннотация настраивает Call<FlickrResponse>, возвращаемый функцией fetchContents(), на выполнение GET-запроса.
     @GET(
         "services/rest/?method=flickr.interestingness.getList" +
                 "&api_key=fbc38de5cae80aed3c212de680b96594" +
